@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title align="center">Mes annonces</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="publier()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item *ngFor="let logement of this.mesannonces" (click)="detail(logement)">
+
+      <ion-thumbnail item-start>
+        <img [src]="logement.photo[0]" *ngIf="logement.photo"/>
+      </ion-thumbnail>
+
+      <h3>{{logement.type}}
+        <span *ngIf="this.cs.indexOf(logement.type) !== -1 ">
+          {{this.logement.moderne || lowerCase}} </span> à <span *ngIf="logement.louer== 'louer' || !logement.louer">louer</span>
+          <span *ngIf="logement.louer== 'vendre'">vendre</span>
+      </h3>
+
+      <p>
+        <ion-icon name="md-pin" color="secondary"></ion-icon>&nbsp;
+        {{logement.ville || upperCase}} - <ion-badge color="primary"> {{logement.quartier}} </ion-badge>
+      </p>
+
+      <p>
+        <ion-icon name="md-basket" color="secondary">
+        </ion-icon>&nbsp;
+        {{logement.prix}} FCFA
+
+        <span *ngIf="logement.louer =='louer' || !logement.louer ">
+          / mois
+          </span>
+      </p>
+
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

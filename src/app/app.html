@@ -1,0 +1,66 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content color="primary">
+    <ion-list no-lines>
+      <button ion-item icon-left menuClose>
+        <ion-icon name="md-home" color="primary"></ion-icon>
+        Accueil
+      </button>
+
+      <button ion-item icon-left menuClose (click)="publier()">
+        <ion-icon name="md-add" color="primary"></ion-icon>
+        Publier une annonce
+      </button>
+      <button ion-item icon-left menuClose (click)="services()">
+        <ion-icon name="md-briefcase" color="primary"></ion-icon>
+        Nos Services
+      </button>
+      <button menuClose ion-item icon-left (click)="mesannonces()" *ngIf="this.user">
+        <ion-icon name="md-list-box" color="primary"></ion-icon>
+        Mes annonces
+      </button>
+      <button ion-item menuClose icon-left (click)="mesfavoris()" *ngIf="this.user">
+        <ion-icon name="md-heart" color="primary"></ion-icon>
+        Mes favoris
+      </button>
+      <button ion-item icon-left menuClose (click)="login()" *ngIf="!this.user">
+        <ion-icon name="md-unlock" color="primary"></ion-icon>
+        Connexion
+      </button>
+
+      <button ion-item icon-left *ngIf="this.user" menuClose (click)="profile()">
+        <ion-icon name="md-contact" color="primary">
+
+        </ion-icon>
+        Mon Profile
+      </button>
+
+      <button ion-item menuClose (click)="logout()" icon-left *ngIf="this.user">
+        <ion-icon name="md-lock" color="primary">
+        </ion-icon>
+        Deconnexion
+      </button>
+
+      <button ion-item icon-left menuClose (click)="inscription()" *ngIf="!this.user">
+        <ion-icon name="md-person-add" color="primary"></ion-icon>
+        Inscription
+      </button>
+      <button ion-item icon-left menuClose (click)="message()">
+        <ion-icon name="md-chatboxes" color="primary">
+        </ion-icon>
+          Laissez-nous un message
+      </button>
+
+      
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

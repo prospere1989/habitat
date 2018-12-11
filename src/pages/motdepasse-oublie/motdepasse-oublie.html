@@ -1,0 +1,24 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Mot de passe oublie</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<form [formGroup]="fGroup" (submit)="changer()">
+  <ion-item>
+    <ion-label floating>
+      Votre Email
+    </ion-label>
+    <ion-input formControlName="email" [(ngModel)]="user.email"[class.invalid]="!this.fGroup.controls.email.valid && this.fGroup.controls.email.dirty">
+
+    </ion-input>
+  </ion-item>
+  <p></p>
+  <button ion-button full color="primary" [disabled]="!this.fGroup.valid">Changer le mot de passe</button>
+</form>
+</ion-content>

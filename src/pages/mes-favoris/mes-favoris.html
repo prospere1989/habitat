@@ -1,0 +1,47 @@
+<!--
+  Generated template for the MesFavorisPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Mes Favoris</ion-title>
+    <ion-buttons end>
+      <button icon-only ion-button (click)="publier()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item *ngFor="let logement of this.listeFavoris" (click)="detail(logement)">
+    <ion-thumbnail item-start>
+      <img [src]="logement.photo[0]" *ngIf="logement.photo"/>
+    </ion-thumbnail>
+
+    <h3>{{logement.type}}
+      <span *ngIf="logement.type=='Terrains' && logement.titre=='titre'">tritré</span>
+      à louer
+
+    </h3>
+
+    <p>
+      <ion-icon name="md-pin" color="secondary"></ion-icon>&nbsp; {{logement.ville || upperCase}} -
+      <ion-badge color="primary"> {{logement.quartier}} </ion-badge>
+    </p>
+
+    <p>
+      <ion-icon name="md-basket" color="secondary">
+      </ion-icon>&nbsp; {{logement.prix}} FCFA
+
+      <span *ngIf="logement.louer =='louer' || !logement.louer ">
+        / mois
+      </span>
+    </p>
+  </ion-item>
+</ion-content>

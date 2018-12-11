@@ -1,0 +1,101 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{this.type.toUpperCase()}}</ion-title>
+    <ion-buttons end>
+      <button icon-only ion-button (click)="publier()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+      <button ion-button icon-only>
+        <ion-icon name="md-search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-segment [(ngModel)]="moderne" color="secondary">
+    <ion-segment-button value="Modernes">
+      Modernes
+    </ion-segment-button>
+    <ion-segment-button value="Simples">
+      Simples
+    </ion-segment-button>
+  </ion-segment>
+
+</ion-header>
+
+<ion-content>
+
+  <div [ngSwitch]="moderne">
+
+    <ion-list *ngSwitchCase="'Modernes'">
+
+      <ion-item *ngFor="let logement of this.listeCsModernes" (click)="detail(logement)">
+
+        <ion-thumbnail item-start>
+          <img [src]="logement.photo[0]" *ngIf="logement.photo" />
+        </ion-thumbnail>
+
+        <h3>{{logement.type}}
+          <span *ngIf="this.cs.indexOf(logement.type) !== -1 ">
+            {{this.logement.moderne || lowerCase}} </span> à
+          <span *ngIf="logement.louer== 'louer' || !logement.louer">louer</span>
+          <span *ngIf="logement.louer== 'vendre'">vendre</span>
+        </h3>
+
+        <p>
+          <ion-icon name="md-pin" color="secondary"></ion-icon>&nbsp; {{logement.ville || upperCase}} -
+          <ion-badge color="primary"> {{logement.quartier}} </ion-badge>
+        </p>
+
+        <p>
+          <ion-icon name="md-basket" color="secondary">
+          </ion-icon>&nbsp; {{logement.prix}} FCFA
+
+          <span *ngIf="logement.louer =='louer' || !logement.louer ">
+            / mois
+          </span>
+        </p>
+      </ion-item>
+      <ion-infinite-scroll (ionInfinite)="scrollModernes($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement des donnees...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+    <ion-list *ngSwitchCase="'Simples'">
+      <ion-spinner *ngIf="this.ok == false">
+
+      </ion-spinner>
+      <ion-item *ngFor="let logement of this.listeCsSimples">
+        <ion-thumbnail item-start></ion-thumbnail>
+
+        <h3>{{logement.type}}
+          <span *ngIf="this.cs.indexOf(logement.type) !== -1 ">
+            {{this.logement.moderne || lowerCase}} </span> à
+          <span *ngIf="logement.louer== 'louer' || !logement.louer">louer</span>
+          <span *ngIf="logement.louer== 'vendre'">vendre</span>
+        </h3>
+
+        <p>
+          <ion-icon name="md-pin" color="secondary"></ion-icon>&nbsp; {{logement.ville || upperCase}} -
+          <ion-badge color="primary"> {{logement.quartier}} </ion-badge>
+        </p>
+
+        <p>
+          <ion-icon name="md-basket" color="secondary">
+          </ion-icon>&nbsp; {{logement.prix}} FCFA
+
+          <span *ngIf="logement.louer =='louer' || !logement.louer ">
+            / mois
+          </span>
+        </p>
+      </ion-item>
+      <!-- <ion-item color="primary" *ngIf="this.finishedSimples">
+        <p>Fin de la liste</p>
+      </ion-item>-->
+      <ion-infinite-scroll (ionInfinite)="scrollSimples($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement des donnees...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+  </div>
+</ion-content>

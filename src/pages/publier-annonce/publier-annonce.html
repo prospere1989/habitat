@@ -1,0 +1,312 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Publier une Annonce</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="this.fGroup">
+    <ion-slides pager="false">
+      <ion-slide>
+
+        <ion-item>
+          <ion-label floating>Type de logement</ion-label>
+          <ion-select [(ngModel)]="annonce.type" required formControlName="type">
+            <ion-option value="Appartements">Appartement</ion-option>
+            <ion-option value="Bureaux">Bureau</ion-option>
+            <ion-option value="Boutiques">Boutique</ion-option>
+            <ion-option value="Chambres">Chambre</ion-option>
+            <ion-option value="Entrepots">Entrepot</ion-option>
+            <ion-option value="Immeubles">Immeuble</ion-option>
+            <ion-option value="Maisons">Maison</ion-option>
+            <ion-option value="Studios">Studio</ion-option>
+            <ion-option value="Terrains">Terrain</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <div formArrayName="caracteristiques">
+          <div [formGroupName]="0">
+
+            <ion-list radio-group *ngIf="this.casm.indexOf(this.fGroup.value.type) !== -1" formControlName="meuble" [(ngModel)]="annonce.meuble">
+              <ion-list-header>
+                Meublé ou non ?
+              </ion-list-header>
+              <ion-row>
+                <ion-col>
+                  <ion-item no-lines>
+                    <ion-label>Meublé</ion-label>
+                    <ion-radio value="oui"></ion-radio>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item no-lines>
+                    <ion-label>Non meublé</ion-label>
+                    <ion-radio value="non"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+            <ion-item *ngIf="!this.fGroup.controls.caracteristiques.controls[0].controls.meuble.valid && this.fGroup.controls.type.dirty">
+
+            </ion-item>
+            <ion-list radio-group *ngIf="this.cs.indexOf(this.fGroup.controls['type'].value) !==-1" [(ngModel)]="annonce.moderne" formControlName="moderne">
+
+              <ion-list-header>
+                Simple ou moderne ?
+              </ion-list-header>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Simple</ion-label>
+                    <ion-radio value="Simples"></ion-radio>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Moderne</ion-label>
+                    <ion-radio value="Modernes"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-item color="danger" *ngIf="this.fGroup.controls.caracteristiques.controls[0].controls.moderne.hasError('moderne')">
+                <p>Faites un choix</p>
+              </ion-item>
+            </ion-list>
+
+            <ion-list formControlName="titre" [(ngModel)]="annonce.titre" radio-group *ngIf="this.fGroup.controls['type'].value =='Terrains'">
+              <ion-list-header>
+                Titré
+              </ion-list-header>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Titré</ion-label>
+                    <ion-radio value="titre"></ion-radio>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Non Titré</ion-label>
+                    <ion-radio value="nontitre"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+
+            <ion-item color="danger" *ngIf="!this.fGroup.controls.caracteristiques.controls[0].controls.titre.valid">
+              <p>
+                Faite un choix
+              </p>
+            </ion-item>
+
+            <ion-list radio-group *ngIf="this.cs.indexOf(this.fGroup.controls['type'].value) ==-1 && this.fGroup.controls['type'].dirty"
+              [(ngModel)]="annonce.louer" formControlName="louer">
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>A vendre</ion-label>
+                    <ion-radio value="vendre"></ion-radio>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>A louer</ion-label>
+                    <ion-radio value="louer"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+            <!-- <ion-item color="danger" *ngIf="this.fGroup.controls['louer'].hasError('louer')">
+                  <p>Faites un choix</p>
+                </ion-item>-->
+
+            <ion-item *ngIf="this.mi.indexOf(this.fGroup.controls['type'].value) !==-1">
+              <ion-label>Niveau</ion-label>
+              <ion-input [(ngModel)]="annonce.niveau" type="number" formControlName="niveau">
+
+              </ion-input>
+            </ion-item>
+            <ion-item color="danger" *ngIf="!this.fGroup.controls.caracteristiques.controls[0].controls.niveau.valid && this.fGroup.controls.caracteristiques.controls[0].controls.niveau.dirty">
+              <p>Entrez une valeur correcte</p>
+            </ion-item>
+            <div *ngIf="this.ma.indexOf(this.fGroup.controls['type'].value) !==-1">
+
+              <ion-item>
+                <ion-label>Chambres</ion-label>
+                <ion-input [(ngModel)]="annonce.chambres" type="number" formControlName="chambres">
+                </ion-input>
+              </ion-item>
+              <ion-item color="danger" *ngIf="!this.fGroup.controls.caracteristiques.controls[0].controls.chambres.valid && this.fGroup.controls.caracteristiques.controls[0].controls.chambres.dirty">
+                <p>Entrez une valeur correcte</p>
+              </ion-item>
+              <ion-item>
+                <ion-label>Douches</ion-label>
+                <ion-input [(ngModel)]="annonce.douches" type="number" formControlName="douches">
+                </ion-input>
+              </ion-item>
+              <ion-item color="danger" *ngIf="!this.fGroup.controls.caracteristiques.controls[0].controls.douches.valid && this.fGroup.controls.caracteristiques.controls[0].controls.douches.dirty">
+                <p>Entrez une valeur correcte</p>
+              </ion-item>
+              <ion-item>
+                <ion-label>Cuisines</ion-label>
+                <ion-input [(ngModel)]="annonce.cuisines" type="number" formControlName="cuisines">
+                </ion-input>
+              </ion-item>
+              <ion-item color="danger" *ngIf="!this.fGroup.controls.caracteristiques.controls[0].controls.cuisines.valid && this.fGroup.controls.caracteristiques.controls[0].controls.cuisines.dirty">
+                <p>Entrez une valeur correcte</p>
+              </ion-item>
+              <ion-item>
+                <ion-label>Salons</ion-label>
+                <ion-input [(ngModel)]="annonce.salons" type="number" formControlName="salons">
+                </ion-input>
+              </ion-item>
+              <ion-item color="danger" *ngIf="!this.fGroup.controls.caracteristiques.controls[0].controls.salons.valid && this.fGroup.controls.caracteristiques.controls[0].controls.salons.dirty">
+                <p>Entrez une valeur correcte</p>
+              </ion-item>
+
+            </div>
+
+            <div>
+
+              <ion-item *ngIf="this.tebb.indexOf(this.fGroup.controls['type'].value) !== -1">
+                <ion-label fixed>Superficie</ion-label>
+                <ion-input type="number" [(ngModel)]="annonce.superficie" formControlName="superficie"></ion-input>
+              </ion-item>
+              <ion-item color="danger" *ngIf="!this.fGroup.controls.caracteristiques.controls[0].controls.superficie.valid && this.fGroup.controls.caracteristiques.controls[0].controls.superficie.dirty">
+                <p>Entrez une valeure correcte (nombre)</p>
+              </ion-item>
+
+              <ion-item *ngIf="this.fGroup.controls['type'].value == 'Terrains'">
+                <ion-label fixed>Unite</ion-label>
+                <ion-select formControlName="unite" [(ngModel)]="annonce.unite">
+                  <ion-option value="m">Metre carre </ion-option>
+                  <ion-option value="h">Hectare </ion-option>
+                </ion-select>
+              </ion-item>
+              <ion-item color="danger" *ngIf="!this.fGroup.controls.caracteristiques.controls[0].controls.unite.valid && this.fGroup.controls.caracteristiques.controls[0].controls.unite.dirty">
+                <p>Entrez une valeure correcte (nombre)</p>
+              </ion-item>
+
+            </div>
+
+          </div>
+
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+
+        <div formArrayName="finances">
+
+          <div [formGroupName]="0">
+
+            <ion-item>
+              <ion-label floating>Prix</ion-label>
+              <ion-input type="number" [(ngModel)]="annonce.prix" formControlName="prix" type="number" required></ion-input>
+            </ion-item>
+
+            <ion-item color="danger" *ngIf="!this.fGroup.controls.finances.controls[0].controls.prix.valid && this.fGroup.controls.finances.controls[0].controls.prix.dirty">
+              <p>Entrez une valeur correcte</p>
+            </ion-item>
+
+            <div *ngIf="this.fGroup.controls.caracteristiques.controls[0].controls.louer.value =='louer' || this.cs.indexOf(this.fGroup.value.type) !== -1 ">
+              
+              <ion-item>
+                <ion-label floating>Caution</ion-label>
+                <ion-input type="number" [(ngModel)]="annonce.caution" formControlName="caution"></ion-input>
+              </ion-item>
+
+              <ion-item color="danger" *ngIf="!this.fGroup.controls.finances.controls[0].controls.caution.valid && this.fGroup.controls.finances.controls[0].controls.caution.dirty">
+                <p>Entrez une valeur correcte</p>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating>Nombre de mois d'avance</ion-label>
+                <ion-input type="number" [(ngModel)]="annonce.avance" formControlName="avance"></ion-input>
+              </ion-item>
+
+              <ion-item color="danger" *ngIf="!this.fGroup.controls.finances.controls[0].controls.avance.valid && this.fGroup.controls.finances.controls[0].controls.avance.dirty">
+                <p>Entrez une valeur correcte</p>
+              </ion-item>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </ion-slide>
+
+      <ion-slide>
+        <div formArrayName="localisation">
+          <div [formGroupName]="0">
+            <ion-item>
+              <ion-label floating>
+                Ville
+              </ion-label>
+              <ion-input formControlName="ville" [(ngModel)]="annonce.ville" required></ion-input>
+            </ion-item>
+
+            <ion-item color="danger" *ngIf="!this.fGroup.controls.localisation.controls[0].controls.ville.valid && this.fGroup.controls.localisation.controls[0].controls.ville.dirty">
+              <p>Entrez un nom de ville</p>
+            </ion-item>
+
+            <ion-item>
+              <ion-label floating>
+                Quartier
+              </ion-label>
+              <ion-input formControlName="quartier" [(ngModel)]="annonce.quartier"></ion-input>
+            </ion-item>
+            <ion-item color="danger" *ngIf="!this.fGroup.controls.localisation.controls[0].controls.quartier.valid && this.fGroup.controls.localisation.controls[0].controls.quartier.dirty">
+              <p>Entrez un nom correcte </p>
+            </ion-item>
+          </div>
+        </div>
+
+      </ion-slide>
+
+      <ion-slide>
+
+        <ion-item no-lines>
+          <p align="center">Potos du logement</p>
+        </ion-item>
+        <button ion-item color="primary" block (click)="take_photos()">
+          Prendre des photos
+        </button>
+        <ion-list>
+          <ion-card *ngFor="let imag of this.annonce.photo">
+            <img [src]="imag" (click)="voir_photo(imag)" />
+
+            <button (click)="del_photo(imag)" ion-button color="primary">Supprimer</button>
+          </ion-card>
+        </ion-list>
+      </ion-slide>
+
+    </ion-slides>
+
+  </form>
+</ion-content>
+<ion-footer align="center">
+  <ion-row>
+    <ion-col>
+      <button block ion-button (click)="next()" [disabled]="(!this.fGroup.valid) && this.slides.getActiveIndex()==3">
+
+        <span *ngIf="this.slides.getActiveIndex() == 3">
+          Publier
+        </span>
+
+        <span *ngIf="this.slides.getActiveIndex() !==3 ">
+          Suivant
+        </span>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button block ion-button (click)="prev()">Precedent</button>
+    </ion-col>
+  </ion-row>
+
+
+</ion-footer>

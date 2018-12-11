@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title align="center">Mon Profile</ion-title>
+    <ion-buttons end>
+      <button icon-only ion-button (click)="modifier()">
+        <ion-icon name="md-create">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Nom</ion-label>
+    <ion-input [disabled]="true" [(ngModel)]="user.nom"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Prenom</ion-label>
+    <ion-input disabled="true" [(ngModel)]="user.prenom"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Telephone</ion-label>
+    <ion-input disabled="true" [(ngModel)]="user.telephone"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Profile</ion-label>
+    <ion-input disabled="true" [(ngModel)]="user.profile"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Email</ion-label>
+    <ion-input disabled="true" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+
+ 
+</ion-content>

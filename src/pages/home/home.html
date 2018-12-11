@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>HABITAT</ion-title>
+    <ion-buttons end>
+        <!--<button icon-only ion-button *ngIf="notifie" (click)="gererNotif()">
+            <ion-icon name="notifications"></ion-icon>
+          </button>
+          <button icon-only ion-button *ngIf="!notifie">
+              <ion-icon name="notifications-off" (click)="gererNotif()"></ion-icon>
+            </button>-->
+      <button icon-only ion-button>
+       
+        <ion-icon name="md-search"></ion-icon>
+      </button>
+
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card (click)="liste('Immeubles')">
+    <img src="assets/imgs/building.jpg" />
+    <ion-card-content>
+      IMMEUBLES
+      <ion-badge> {{this.immeubles}} ANNONCES</ion-badge>
+    </ion-card-content>
+  </ion-card>
+  <ion-card (click)="liste('Maisons')">
+    <img src="assets/imgs/home.jpg" />
+    <ion-card-content>
+      MAISONS
+      <ion-badge> {{this.maisons}} ANNONCES</ion-badge>
+    </ion-card-content>
+  </ion-card>
+  <ion-card (click)="liste('Appartements')">
+   <img src="assets/imgs/appart.jpg" />
+    <ion-card-content>
+      APPARTEMENTS
+      <ion-badge> {{this.apparts}} ANNONCES</ion-badge>
+    </ion-card-content>
+  </ion-card>
+  <ion-card (click)="liste('Studios')">
+    <img src="assets/imgs/studios.jpg" />
+    <ion-card-content>
+      STUDIOS
+      <ion-badge> {{this.studios}} ANNONCES</ion-badge>
+    </ion-card-content>
+  </ion-card>
+  <ion-card (click)="liste('Chambres')">
+    <img src="assets/imgs/bedroom.jpg" />
+    <ion-card-content>
+      CHAMBRES
+      <ion-badge>{{this.chambres}} ANNONCES</ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="liste('Bureaux')">
+    <img src="assets/imgs/office.jpg" />
+    <ion-card-content>
+      BUREAUX
+      <ion-badge> {{this.bureaux}} ANNONCES</ion-badge>
+    </ion-card-content>
+  </ion-card>
+  <ion-card (click)="liste('Boutiques')">
+    <img src="assets/imgs/shop.jpg" />
+    <ion-card-content>
+      BOUTIQUES
+      <ion-badge> {{this.boutiques}} ANNONCES</ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="liste('Entrepots')">
+    <img src="assets/imgs/entrepots.jpg" />
+    <ion-card-content>
+      ENTREPOTS
+      <ion-badge> {{this.entrepots}}  ANNONCES</ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="liste('Terrains')">
+    <img src="assets/imgs/land.jpg" />
+    <ion-card-content>
+      TERRAINS
+      <ion-badge> {{this.terrains}}  ANNONCES</ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

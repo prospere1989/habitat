@@ -1,0 +1,130 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+
+    <ion-title>Details</ion-title>
+
+    <ion-buttons end style="width:40%">
+
+      <button ion-button icon-only (click)="modifier()" *ngIf="this.edit">
+        <ion-icon name="md-create"></ion-icon>
+      </button>
+
+      <button ion-button icon-only (click)="save()" *ngIf="!this.saved && this.user && this.favorisTab">
+        <ion-icon name="md-heart-outline" color="secondary"></ion-icon>
+      </button>
+
+      <button ion-button icon-only (click)="unsave()" *ngIf="this.saved && this.user && this.favorisTab">
+        <ion-icon name="md-heart" color="secondary"></ion-icon>
+      </button>
+
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <img [src]="this.annonce.photo[0]" *ngIf="this.annonce.photo"/>
+    <ion-card-header>
+      <ion-card-title>
+        {{this.annonce.type}}
+        <span *ngIf="this.annonce.type=='Terrains' && this.annonce.titre=='titre'">tritré</span>
+        <span *ngIf="this.cs.indexOf(this.annonce.type) !==-1">
+          {{ this.annonce.moderne }} <br/> <span *ngIf="this.annonce.meuble == 'oui'"> meublée</span>
+          à louer
+        </span>
+        <span *ngIf="this.cs.indexOf(this.annonce.type) ==-1">
+          à {{this.annonce.louer}}
+        </span>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon item-start name="md-pin" color="secondary"></ion-icon>
+        <h2> {{this.annonce.ville}} -
+          <ion-badge color="primary"> {{this.annonce.quartier}} </ion-badge>
+        </h2>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon item-start name="md-basket" color="secondary">
+
+        </ion-icon>
+
+        <h2>
+          Prix : {{this.annonce.prix}} FCFA
+          <span *ngIf="this.annonce.louer == 'louer' || this.cs.indexOf(this.annonce.type) !==-1">
+            / mois
+          </span>
+        </h2>
+
+        <P *ngIf="this.annonce.louer == 'louer'">
+          Caution : {{this.annonce.caution}} FCFA
+        </P>
+        <P *ngIf="this.annonce.louer == 'louer'">
+          payer {{this.annonce.avance}} mois d'avance
+        </P>
+
+      </ion-item>
+      <ion-item *ngIf="this.tebb.indexOf(this.annonce.type) !==-1">
+        <ion-icon name="md-pie" color="secondary" item-start>
+
+        </ion-icon>
+        <h2>
+          {{this.annonce.superficie}}
+          <span *ngIf="this.annonce.unite=='m'">Metre carré</span>
+          <span *ngIf="this.annonce.unite == 'h'">Hectares</span>
+        </h2>
+      </ion-item>
+      <ion-item *ngIf="this.mi.indexOf(this.annonce.type) !==-1">
+        <ion-icon name="md-list-box" item-start color="secondary"></ion-icon>
+        <h2> {{this.annonce.niveau}} Niveaux </h2>
+      </ion-item>
+
+      <div *ngIf="this.ma.indexOf(this.annonce.type) !==-1">
+        <ion-item>
+          <ion-icon>
+
+          </ion-icon>
+          <h2>
+            {{this.annonce.chambres}} chambres
+          </h2>
+        </ion-item>
+        <ion-item>
+          <ion-icon>
+
+          </ion-icon>
+          <h2>
+            {{this.annonce.douches}} douches
+          </h2>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="md-restaurant" color="secondary" item-start>
+
+          </ion-icon>
+          <h2>
+            {{this.annonce.cuisines}} cuisines
+          </h2>
+        </ion-item>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col>
+      <button ion-button full color="primary" (click)="question()">
+        Question
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button full color="primary" (click)="visiter()">
+         Visiter
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

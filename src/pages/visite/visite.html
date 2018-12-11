@@ -1,0 +1,95 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Demande de visite</ion-title>
+    <ion-buttons end>
+      <button icon-only ion-button (click)="fermer()">
+        <ion-icon name="md-close">
+
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="this.fGroup" (submit)="envoyer()">
+    <!-- <div *ngIf="!firebase.auth().currentUser">-->
+
+    <ion-item>
+      <ion-label floating>
+        Nom
+      </ion-label>
+      <ion-input [(ngModel)]="user.nom" formControlName="nom">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!this.fGroup.controls.nom && this.fGroup.controls.nom.dirty" color="danger">
+      <p>Le nom est requis (au moins 3 caracteres)</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        Prenom
+      </ion-label>
+      <ion-input [(ngModel)]="user.prenom" formControlName="prenom">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        Telephone
+      </ion-label>
+      <ion-input [(ngModel)]="user.telephone" formControlName="telephone">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!this.fGroup.controls.telephone.valid && this.fGroup.controls.telephone.dirty" color="danger">
+      <p>Le numero est incorrect</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        Email
+      </ion-label>
+      <ion-input [(ngModel)]="user.email" formControlName="email">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!this.fGroup.controls.email.valid && this.fGroup.controls.email.dirty" color="danger">
+      <p>L'email speocofe est incorrect</p>
+    </ion-item>
+    <!--  </div>-->
+
+    <ion-item>
+      <ion-label floating>
+        Date de la visite
+      </ion-label>
+      <ion-datetime [(ngModel)]="message.objet" formControlName="objet">
+
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item *ngIf="!this.fGroup.controls.objet.valid && this.fGroup.controls.objet.dirty" color="danger">
+      <p>La date de la visite est requise</p>
+    </ion-item>
+
+    <button ion-button color="primary" full [disabled]="!this.fGroup.valid">
+      envoyer
+    </button>
+
+  </form>
+  <ion-item>
+   <p>
+    Les frais de visite s'elevent a <br/>10 000 FCFA pour <br/> les particulier 
+    et 25 000 FCFA pour <br/>les entreprises
+   </p> 
+  </ion-item>
+</ion-content>

@@ -1,0 +1,100 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Questions</ion-title>
+    <ion-buttons end *ngIf="this.ok">
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="md-close">
+
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="this.fGroup" (submit)="envoyer()">
+    <!-- <div *ngIf="!firebase.auth().currentUser">-->
+
+    <ion-item>
+      <ion-label floating>
+        Nom
+      </ion-label>
+      <ion-input [(ngModel)]="user.nom" formControlName="nom">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!this.fGroup.controls.nom && this.fGroup.controls.nom.dirty" color="danger">
+      <p>Le nom est requis (au moins 3 caracteres)</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        Prenom
+      </ion-label>
+      <ion-input [(ngModel)]="user.prenom" formControlName="prenom">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        Telephone
+      </ion-label>
+      <ion-input [(ngModel)]="user.telephone" formControlName="telephone">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!this.fGroup.controls.telephone.valid && this.fGroup.controls.telephone.dirty" color="danger">
+      <p>Le numero est incorrect</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        Email
+      </ion-label>
+      <ion-input [(ngModel)]="user.email" formControlName="email">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!this.fGroup.controls.email.valid && this.fGroup.controls.email.dirty" color="danger">
+      <p>L'email speocofe est incorrect</p>
+    </ion-item>
+    <!--  </div>-->
+
+    <ion-item>
+      <ion-label floating>
+        Objet
+      </ion-label>
+      <ion-input [(ngModel)]="message.objet" formControlName="objet">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!this.fGroup.controls.objet.valid && this.fGroup.controls.objet.dirty" color="danger">
+      <p>L'objet du message est requis</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        Message
+      </ion-label>
+      <ion-textarea formControlName="message" [(ngModel)]="message.message">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item *ngIf="!this.fGroup.controls.message.valid && this.fGroup.controls.message.dirty" color="danger">
+      <p>Saisissez aumoins 10 lettres</p>
+    </ion-item>
+
+    <button ion-button color="primary" full [disabled]="!this.fGroup.valid">
+      envoyer
+    </button>
+
+  </form>
+  
+</ion-content>

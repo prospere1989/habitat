@@ -1,0 +1,64 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title align="center">Envoie de message</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup] = "fMessage" (submit)="sendMessage()">
+    <div [class.invisible]="this.user">
+      <ion-item>
+        <ion-label floating>
+          Votre nom :
+        </ion-label>
+        <ion-input [(ngModel)]="message.user.nom" formControlName="nom">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          Votre prenom :
+        </ion-label>
+        <ion-input [(ngModel)]="message.user.prenom" formControlName="prenom">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          Votre telephone :
+        </ion-label>
+        <ion-input [(ngModel)]="message.user.telephone" formControlName="telephone">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          Votre email :
+        </ion-label>
+        <ion-input [(ngModel)]="message.user.email" formControlName="email">
+        </ion-input>
+      </ion-item>
+    </div>
+
+    <ion-item>
+      <ion-label floating>
+        Objet du message
+      </ion-label>
+      <ion-input [(ngModel)]="message.objet" formControlName="objet">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        Message :
+      </ion-label>
+      <ion-textarea [(ngModel)]="message.message" formControlName="message">
+      </ion-textarea>
+    </ion-item>
+
+    <button ion-button color="primary" full block>
+      Envoyer
+    </button>
+
+  </form>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title align="center">Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="fGroup" (submit)="login()">
+    <ion-item>
+      <ion-label floating>
+        Email
+      </ion-label>
+      <ion-input type="email" [(ngModel)]="user.email" formControlName="email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>
+        Mot de passe
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="user.motdepasse" formControlName="motdepasse" required></ion-input>
+    </ion-item>
+    <ion-item no-lines>
+      <p align="right" color="primary" (click)="forgot()">Mot de passe oublie ?</p>
+    </ion-item>
+    <button full ion-button color="primary" [disabled]="!this.fGroup.valid">Connexion</button>
+  </form>
+</ion-content>
